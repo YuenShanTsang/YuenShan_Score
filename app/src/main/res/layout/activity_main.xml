@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:baselineAligned="false"
         android:weightSum="2"
         android:layout_weight="1">
 
@@ -24,41 +25,43 @@
 
             <!--Team A title-->
             <TextView
-                android:id="@+id/team_text_view"
+                android:id="@+id/teamA_text_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/teamA_text"
                 android:layout_marginBottom="50dp"
-                android:textSize="32dp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/add_button"
+                android:id="@+id/add_buttonA"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/add_button"
                 android:drawableEnd="@drawable/add_icon"
+                android:textSize="20sp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp" />
 
             <TextView
-                android:id="@+id/score_text_view"
+                android:id="@+id/scoreA_text_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
                 android:text="@string/scoreA_text"
-                android:textSize="40dp" />
+                android:textSize="40sp" />
 
             <Button
-                android:id="@+id/deduct_button"
+                android:id="@+id/deduct_buttonA"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/deduct_button"
+                android:textSize="20sp"
                 android:drawableEnd="@drawable/deduct_icon"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp" />
@@ -75,44 +78,47 @@
 
             <!--Team B title-->
             <TextView
-                android:id="@+id/team_text_view"
+                android:id="@+id/teamB_text_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
                 android:gravity="center"
                 android:text="@string/teamB_text"
-                android:textSize="32dp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/add_button"
+                android:id="@+id/add_buttonB"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/add_button"
+                android:textSize="20sp"
                 android:drawableEnd="@drawable/add_icon"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp" />
 
             <TextView
-                android:id="@+id/score_text_view"
+                android:id="@+id/scoreB_text_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
                 android:text="@string/scoreB_text"
-                android:textSize="40dp" />
+                android:textSize="40sp" />
 
             <Button
-                android:id="@+id/deduct_button"
+                android:id="@+id/deduct_buttonB"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+
+                android:drawableEnd="@drawable/deduct_icon"
                 android:gravity="center"
                 android:text="@string/deduct_button"
-                android:drawableEnd="@drawable/deduct_icon"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -126,10 +132,9 @@
         android:layout_weight="2">
 
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="100dp" >
 
             <RadioButton
@@ -138,24 +143,24 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/radio1_button"
-                android:textColor="@android:color/system_neutral2_700"
-                android:textSize="30dp" />
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="30sp" />
 
             <RadioButton
                 android:id="@+id/radio2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/radio2_button"
-                android:textColor="@android:color/system_neutral2_700"
-                android:textSize="30dp" />
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="30sp" />
 
             <RadioButton
                 android:id="@+id/radio3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/radio3_button"
-                android:textColor="@android:color/system_neutral2_700"
-                android:textSize="30dp" />
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="30sp" />
         </RadioGroup>
 
     </LinearLayout>
