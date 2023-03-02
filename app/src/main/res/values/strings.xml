@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">YuenShan_Score</string>
+    <string name="app_name">Score Keeper</string>
+    <string name="teamA_text">Team A</string>
+    <string name="teamB_text">Team B</string>
+    <string name="scoreA_text">0</string>
+    <string name="scoreB_text">0</string>
+    <string name="add_button">Add</string>
+    <string name="deduct_button">Deduct</string>
+    <string name="radio1_button">1 point</string>
+    <string name="radio2_button">2 points</string>
+    <string name="radio3_button">3 points</string>
+
 </resources>
