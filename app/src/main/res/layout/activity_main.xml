@@ -1,50 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Divide the screen into upper and lower part-->
+<!--Divide the screen into upper (2 Scoreboards) and lower part (Change points)-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="3">
 
-    <!--Divide the upper part into left and right-->
+    <!--Divide the upper part into left (Team A) and right (Team B) scoreboards-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:baselineAligned="false"
-        android:weightSum="2"
-        android:layout_weight="1">
+        android:weightSum="2">
 
-        <!--Vertical and center the left part-->
+        <!--Team A scoreboard-->
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_weight="1">
+            tools:ignore="NestedWeights">
 
-            <!--Team A title-->
+            <!--Team A name-->
             <TextView
                 android:id="@+id/teamA_text_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
                 android:gravity="center"
                 android:text="@string/teamA_text"
-                android:layout_marginBottom="50dp"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
+            <!--Team A add score button-->
             <Button
                 android:id="@+id/add_buttonA"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:text="@string/add_button"
-                android:drawableEnd="@drawable/add_icon"
                 android:textSize="20sp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp" />
+                android:textColor="@color/material_dynamic_neutral40"
+                android:drawableEnd="@drawable/add_icon"
+                tools:ignore="VisualLintButtonSize,DuplicateSpeakableTextCheck" />
 
+            <!--Team A score display-->
             <TextView
                 android:id="@+id/scoreA_text_view"
                 android:layout_width="fill_parent"
@@ -55,28 +61,31 @@
                 android:text="@string/scoreA_text"
                 android:textSize="40sp" />
 
+            <!--Team A deduct score button-->
             <Button
                 android:id="@+id/deduct_buttonA"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:text="@string/deduct_button"
                 android:textSize="20sp"
+                android:textColor="@color/material_dynamic_neutral40"
                 android:drawableEnd="@drawable/deduct_icon"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp" />
+                tools:ignore="VisualLintButtonSize,DuplicateSpeakableTextCheck" />
 
         </LinearLayout>
 
-        <!--Vertical and center the right part-->
+        <!--Team B scoreboard-->
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:gravity="center">
 
-            <!--Team B title-->
+            <!--Team B name-->
             <TextView
                 android:id="@+id/teamB_text_view"
                 android:layout_width="fill_parent"
@@ -87,17 +96,21 @@
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
+            <!--Team B add score button-->
             <Button
                 android:id="@+id/add_buttonB"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:text="@string/add_button"
                 android:textSize="20sp"
+                android:textColor="@color/material_dynamic_neutral40"
                 android:drawableEnd="@drawable/add_icon"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp" />
+                tools:ignore="VisualLintButtonSize" />
 
+            <!--Team B score display-->
             <TextView
                 android:id="@+id/scoreB_text_view"
                 android:layout_width="fill_parent"
@@ -108,59 +121,67 @@
                 android:text="@string/scoreB_text"
                 android:textSize="40sp" />
 
+            <!--Team B deduct score button-->
             <Button
                 android:id="@+id/deduct_buttonB"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-
-                android:drawableEnd="@drawable/deduct_icon"
                 android:gravity="center"
                 android:text="@string/deduct_button"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/material_dynamic_neutral40"
+                android:drawableEnd="@drawable/deduct_icon"
+                tools:ignore="VisualLintButtonSize" />
 
         </LinearLayout>
 
     </LinearLayout>
 
+    <!--Change points display-->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:layout_weight="2"
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_weight="2">
+        android:gravity="center">
 
+        <!--Three radio buttons with different values-->
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp" >
+            android:layout_marginBottom="100dp"
+            tools:ignore="UselessParent">
 
+            <!--One point radio button-->
             <RadioButton
                 android:id="@+id/radio1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="@string/radio1_button"
-                android:textColor="@android:color/secondary_text_light"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:checked="true" />
 
+            <!--Two points radio button-->
             <RadioButton
                 android:id="@+id/radio2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/radio2_button"
-                android:textColor="@android:color/secondary_text_light"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/material_dynamic_neutral30" />
 
+            <!--Three points radio button-->
             <RadioButton
                 android:id="@+id/radio3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/radio3_button"
-                android:textColor="@android:color/secondary_text_light"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/material_dynamic_neutral30" />
         </RadioGroup>
 
     </LinearLayout>
