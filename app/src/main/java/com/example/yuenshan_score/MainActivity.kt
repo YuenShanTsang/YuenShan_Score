@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     // Function to update the scoreboard for Team A in the app UI
     private fun updateTeamAScore(){
-        /**To ensure that the score is within the range of 0 to 200 by using coerceIn() function
+        /**To ensure that the score is within the range of 0 to 200 by using coerceIn() function.
         It prevents the score from becoming negative or exceeding the maximum limit.**/
         teamAScore = teamAScore.coerceIn(0, 200)
         // Display the updated score for Team A
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     //Function to update the scoreboard for Team B in the app UI
     private fun updateTeamBScore(){
-        /**To ensure that the score is within the range of 0 to 200.
+        /**To ensure that the score is within the range of 0 to 200 by using coerceIn() function.
         It prevents the score from becoming negative or exceeding the maximum limit.**/
         teamBScore = teamBScore.coerceIn(0, 200)
         // Display the updated score for Team B
