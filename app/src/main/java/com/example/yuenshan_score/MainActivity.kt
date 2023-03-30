@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-// Initialize views and preferences
+        // Initialize views and preferences
         nightModeSwitch = findViewById(R.id.night_mode_switch)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 

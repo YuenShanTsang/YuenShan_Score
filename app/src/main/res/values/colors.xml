@@ -3,18 +3,19 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <!--Day color-->
     <color name="pink">#FABAC3</color>
     <color name="coral">#F88B82</color>
     <color name="coral_pink">#F88379</color>
     <color name="soft_pink">#FFD1E1</color>
     <color name="soft_blue">#C0C9FF</color>
 
+    <!--Night color-->
     <color name="periwinkle">#9096B7</color>
     <color name="pale_purple">#F0DDE7</color>
     <color name="lilac">#C8A2C8</color>
     <color name="dark_grey">#222222</color>
     <color name="dark_blue">#000633</color>
     <color name="grey">#FF454749</color>
-
 
 </resources>
