@@ -3,4 +3,5 @@
     android:shape="rectangle">
     <!--Round button shape-->
     <corners android:radius="35dp" />
+    <solid android:color="@color/white" />
 </shape>
