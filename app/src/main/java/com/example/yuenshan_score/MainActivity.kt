@@ -1,10 +1,15 @@
 package com.example.yuenshan_score
 
+import android.content.res.Configuration
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.Button
 import android.widget.RadioGroup
+import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,9 +31,48 @@ class MainActivity : AppCompatActivity() {
     private var teamBScore = 0
     private var changeScore = 1
 
+    private lateinit var nightModeSwitch: Switch
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+// Initialize views and preferences
+        nightModeSwitch = findViewById(R.id.night_mode_switch)
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        // Set the initial state of the switch based on the user's preference
+        nightModeSwitch.isChecked = sharedPreferences.getBoolean("night_mode", false)
+
+        // Set the listener for the switch
+        nightModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            // Save the user's preference for night mode
+            sharedPreferences.edit().putBoolean("night_mode", isChecked).apply()
+
+            // Apply the appropriate theme based on the user's preference
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+
+            // Set the background drawable based on the night mode state
+            if (isChecked) {
+                window.setBackgroundDrawableResource(R.drawable.night_background)
+            } else {
+                window.setBackgroundDrawableResource(R.drawable.day_background)
+            }
+        }
+
+        // Set the background drawable based on the current night mode state
+        if (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) {
+            window.setBackgroundDrawableResource(R.drawable.night_background)
+            nightModeSwitch.isChecked = true
+        } else {
+            window.setBackgroundDrawableResource(R.drawable.day_background)
+            nightModeSwitch.isChecked = false
+        }
 
         // Initialize Team A views
         scoreATextView = findViewById(R.id.scoreA_text_view)

@@ -45,10 +45,8 @@
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:text="@string/add_button"
-                android:textSize="20sp"
-                android:textColor="@color/material_dynamic_neutral40"
-                android:drawableEnd="@drawable/add_icon"
-                tools:ignore="VisualLintButtonSize,DuplicateSpeakableTextCheck" />
+                tools:ignore="VisualLintButtonSize,DuplicateSpeakableTextCheck"
+                style="@style/button_style" />
 
             <!--Team A score display-->
             <TextView
@@ -70,10 +68,8 @@
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:text="@string/deduct_button"
-                android:textSize="20sp"
-                android:textColor="@color/material_dynamic_neutral40"
-                android:drawableEnd="@drawable/deduct_icon"
-                tools:ignore="VisualLintButtonSize,DuplicateSpeakableTextCheck" />
+                tools:ignore="VisualLintButtonSize,DuplicateSpeakableTextCheck"
+                style="@style/button_style" />
 
         </LinearLayout>
 
@@ -105,10 +101,8 @@
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:text="@string/add_button"
-                android:textSize="20sp"
-                android:textColor="@color/material_dynamic_neutral40"
-                android:drawableEnd="@drawable/add_icon"
-                tools:ignore="VisualLintButtonSize" />
+                tools:ignore="VisualLintButtonSize"
+                style="@style/button_style" />
 
             <!--Team B score display-->
             <TextView
@@ -130,10 +124,8 @@
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
                 android:text="@string/deduct_button"
-                android:textSize="20sp"
-                android:textColor="@color/material_dynamic_neutral40"
-                android:drawableEnd="@drawable/deduct_icon"
-                tools:ignore="VisualLintButtonSize" />
+                tools:ignore="VisualLintButtonSize"
+                style="@style/button_style" />
 
         </LinearLayout>
 
@@ -152,7 +144,7 @@
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="50dp"
             tools:ignore="UselessParent">
 
             <!--One point radio button-->
@@ -172,6 +164,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/radio2_button"
                 android:textSize="30sp"
+
                 android:textColor="@color/material_dynamic_neutral30" />
 
             <!--Three points radio button-->
@@ -183,6 +176,15 @@
                 android:textSize="30sp"
                 android:textColor="@color/material_dynamic_neutral30" />
         </RadioGroup>
+
+        <Switch
+            android:id="@+id/night_mode_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:minHeight="48dp"
+            android:text="@string/night_mode_switch"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </LinearLayout>
 
