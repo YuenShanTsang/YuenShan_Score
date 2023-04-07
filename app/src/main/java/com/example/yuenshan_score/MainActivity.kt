@@ -1,14 +1,14 @@
 package com.example.yuenshan_score
 
-import android.content.res.Configuration
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.widget.Button
-import android.widget.RadioGroup
-import android.widget.Switch
-import android.widget.TextView
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
 class MainActivity : AppCompatActivity() {
@@ -146,4 +146,25 @@ class MainActivity : AppCompatActivity() {
         scoreBTextView.text = teamBScore.toString()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.about -> {
+                val toast = Toast.makeText(this, "Developed by Yuen Shan Tsang(Clary)\nCourse Code: JAV1001", Toast.LENGTH_SHORT)
+                toast.show()
+                true
+            }
+            R.id.settings -> {
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
+

@@ -10,4 +10,6 @@
     <string name="radio2_button">2 points</string>
     <string name="radio3_button">3 points</string>
     <string name="night_mode_switch">Night Mode</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
 </resources>
