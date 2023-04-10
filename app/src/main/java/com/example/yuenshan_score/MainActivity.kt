@@ -1,5 +1,6 @@
 package com.example.yuenshan_score
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
@@ -155,12 +156,19 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         return when (item.itemId) {
+            R.id.home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                true
+            }
             R.id.about -> {
-                val toast = Toast.makeText(this, "Developed by Yuen Shan Tsang(Clary)\nCourse Code: JAV1001", Toast.LENGTH_SHORT)
+                val toast = Toast.makeText(this, "Developed by Yuen Shan Tsang (Clary)\nCourse Code: JAV1001", Toast.LENGTH_SHORT)
                 toast.show()
                 true
             }
             R.id.settings -> {
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)
