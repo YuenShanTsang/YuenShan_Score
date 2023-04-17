@@ -3,7 +3,6 @@
     <style name="button_style" parent="Widget.AppCompat.Button">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/material_dynamic_neutral40</item>
-        <item name="android:drawableEnd">@drawable/deduct_icon</item>
         <item name="android:background">@drawable/button_shape</item>
         <item name="android:foreground">@drawable/onclick_effect</item>
     </style>

@@ -1,39 +1,45 @@
 package com.example.yuenshan_score
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Switch
 import android.widget.Toast
+import com.example.yuenshan_score.databinding.ActivitySettingBinding
 
 class SettingActivity : AppCompatActivity() {
 
+    // Init view binding
+    private lateinit var binding: ActivitySettingBinding
 
-    private lateinit var saveScoreSwitch: Switch
     private lateinit var sharedPreferences: SharedPreferences
-
+    private val savePrefs = "SavePrefs"
+    private val checkedSwitch = "CheckedSwitch"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
+        // Setup view binding
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        saveScoreSwitch = findViewById(R.id.save_switch)
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        sharedPreferences = getSharedPreferences(savePrefs, Context.MODE_PRIVATE)
 
-        // Set the initial state of the switch based on the user's preference
-        saveScoreSwitch.isChecked = sharedPreferences.getBoolean("save_scores", false)
+        // Retrieve saved switch value
+        val isChecked = sharedPreferences.getBoolean(checkedSwitch, false)
+        binding.saveSwitch.isChecked = isChecked
 
-        // Set the listener for the switch
-        saveScoreSwitch.setOnCheckedChangeListener { _, isChecked ->
-            // Save the user's preference for saving scores
-            sharedPreferences.edit().putBoolean("save_scores", isChecked).apply()
+        binding.saveSwitch.setOnCheckedChangeListener { _, isChecked ->
+            // Save switch value to SharedPreferences
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(checkedSwitch, isChecked)
+            editor.apply()
 
-
+            val message = if (isChecked) "Scores will be saved" else "Scores will not be saved"
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
 
