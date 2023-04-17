@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     // Init view binding
     private lateinit var binding: ActivityMainBinding
 
+    // Initialize shared preferences variable
     private lateinit var sharedPrefs: SharedPreferences
 
     // Update score variable declaration
@@ -40,6 +41,15 @@ class MainActivity : AppCompatActivity() {
         // Set the text views to display the saved scores
         binding.scoreATextView.text = teamAScore.toString()
         binding.scoreBTextView.text = teamBScore.toString()
+
+        // Update the score if the switch is turned off
+        val isEnabled = intent.getBooleanExtra("isEnabled", switchEnabled())
+        if (!isEnabled) {
+            teamAScore = 0
+            teamBScore = 0
+            binding.scoreATextView.text = "0"
+            binding.scoreBTextView.text = "0"
+        }
 
         // Set the listener for the switch
         binding.nightModeSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -100,9 +110,19 @@ class MainActivity : AppCompatActivity() {
             saveScore()
         }
 
+        // Clear scores and update UI
+        binding.clearButton.setOnClickListener {
+            teamAScore = 0
+            teamBScore = 0
+            binding.scoreATextView.text = "0"
+            binding.scoreBTextView.text = "0"
+            saveScore()
+        }
     }
 
+
     private fun switchEnabled() : Boolean {
+        // Retrieve the value of the "EnabledSwitch" boolean preference from the "SavePrefs" SharedPreferences
         return getSharedPreferences("SavePrefs", Context.MODE_PRIVATE)
             .getBoolean("EnabledSwitch", false)
     }
@@ -110,6 +130,7 @@ class MainActivity : AppCompatActivity() {
     private fun saveScore() {
         if (switchEnabled()) {
             val editor = getSharedPreferences("ScorePrefs", Context.MODE_PRIVATE).edit()
+            // Add the scores for team A and team B as String values to the editor
             editor.apply {
                 putString("teamA_score", teamAScore.toString())
                 putString("teamB_score", teamBScore.toString())
@@ -135,6 +156,7 @@ class MainActivity : AppCompatActivity() {
         binding.scoreBTextView.text = teamBScore.toString()
     }
 
+    // Create menu to the ActionBar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
@@ -145,16 +167,19 @@ class MainActivity : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.home -> {
+                // Go to main activity
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 true
             }
             R.id.about -> {
+                // Toast that displays developer information
                 val toast = Toast.makeText(this, "Developed by Yuen Shan Tsang (Clary)\nCourse Code: JAV1001", Toast.LENGTH_SHORT)
                 toast.show()
                 true
             }
             R.id.settings -> {
+                // Go to setting activity
                 val intent = Intent(this, SettingActivity::class.java)
                 startActivity(intent)
                 true
