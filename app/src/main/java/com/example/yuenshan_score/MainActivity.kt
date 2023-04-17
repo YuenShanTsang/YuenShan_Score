@@ -17,11 +17,7 @@ class MainActivity : AppCompatActivity() {
     // Init view binding
     private lateinit var binding: ActivityMainBinding
 
-    // Declare share preferences
     private lateinit var sharedPrefs: SharedPreferences
-
-    // Declare preferences key
-    private val preferences = "MyScore"
 
     // Update score variable declaration
     private var teamAScore = 0
@@ -36,8 +32,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize the shared preferences object with the mode set to private
-        sharedPrefs = getPreferences(Context.MODE_PRIVATE)
+        // Retrieve the saved scores from shared preferences
+        sharedPrefs = getSharedPreferences("ScorePrefs", Context.MODE_PRIVATE)
+        teamAScore = sharedPrefs.getString("teamA_score", "0")?.toInt() ?: 0
+        teamBScore = sharedPrefs.getString("teamB_score", "0")?.toInt() ?: 0
+
+        // Set the text views to display the saved scores
+        binding.scoreATextView.text = teamAScore.toString()
+        binding.scoreBTextView.text = teamBScore.toString()
 
         // Set the listener for the switch
         binding.nightModeSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -58,63 +60,61 @@ class MainActivity : AppCompatActivity() {
                 R.id.radio2 -> changeScore = 2
                 R.id.radio3 -> changeScore = 3
             }
-
         }
 
         // Lambda function to set up the add and deduct buttons for Team A
         binding.addButtonA.setOnClickListener{
             // Increment the score for Team A by the changeScore value when add button is clicked
             teamAScore += changeScore
-            // Save the current score of Team A in shared preferences
-            if(switchChecked()){
-                saveScore()
-            }
             // Update the scoreboard for Team A
             updateTeamAScore()
+            // Save the score to SharedPreferences
+            saveScore()
         }
 
         binding.deductButtonA.setOnClickListener{
             // Decrement the score for Team A by the changeScore value when deduct button is clicked
             teamAScore -= changeScore
-            // Save the current score of Team A in shared preferences
-            if(switchChecked()){
-                saveScore()
-            }
             // Update the scoreboard for Team A
             updateTeamAScore()
+            // Save the score to SharedPreferences
+            saveScore()
         }
 
         // Lambda function to set up the add and deduct buttons for Team B
         binding.addButtonB.setOnClickListener{
             // Increment the score for Team B by the changeScore value when add button is clicked
             teamBScore += changeScore
-            // Save the current score of Team B in shared preferences
-            if(switchChecked()){
-                saveScore()
-            }
             // Update the scoreboard for Team B
             updateTeamBScore()
+            // Save the score to SharedPreferences
+            saveScore()
         }
 
         binding.deductButtonB.setOnClickListener{
             // Decrement the score for Team B by the changeScore value when deduct button is clicked
             teamBScore -= changeScore
-            // Save the current score of Team B in shared preferences
-            if(switchChecked()){
-                saveScore()
-            }
             // Update the scoreboard for Team B
             updateTeamBScore()
+            // Save the score to SharedPreferences
+            saveScore()
         }
 
     }
+
+    private fun switchEnabled() : Boolean {
+        return getSharedPreferences("SavePrefs", Context.MODE_PRIVATE)
+            .getBoolean("EnabledSwitch", false)
+    }
+
     private fun saveScore() {
-        val sharedPreferences = getSharedPreferences(preferences, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.apply {
-            putString("teamA_score", teamAScore.toString())
-            putString("teamB_score", teamBScore.toString())
-        }.apply()
+        if (switchEnabled()) {
+            val editor = getSharedPreferences("ScorePrefs", Context.MODE_PRIVATE).edit()
+            editor.apply {
+                putString("teamA_score", teamAScore.toString())
+                putString("teamB_score", teamBScore.toString())
+            }.apply()
+        }
     }
 
     // Function to update the scoreboard for Team A in the app UI
@@ -133,12 +133,6 @@ class MainActivity : AppCompatActivity() {
         teamBScore = teamBScore.coerceIn(0, 200)
         // Display the updated score for Team B
         binding.scoreBTextView.text = teamBScore.toString()
-    }
-
-    private fun switchChecked() : Boolean {
-
-        return getSharedPreferences("settings", Context.MODE_PRIVATE)
-            .getBoolean("isChecked", false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -162,8 +156,6 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.settings -> {
                 val intent = Intent(this, SettingActivity::class.java)
-                intent.putExtra("teamAScore", binding.teamATextView.text)
-                intent.putExtra("teamBScore", binding.teamBTextView.text)
                 startActivity(intent)
                 true
             }

@@ -17,8 +17,9 @@ class SettingActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingBinding
 
     private lateinit var sharedPreferences: SharedPreferences
+
     private val savePrefs = "SavePrefs"
-    private val checkedSwitch = "CheckedSwitch"
+    private val enabledSwitch = "EnabledSwitch"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,22 +30,26 @@ class SettingActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences(savePrefs, Context.MODE_PRIVATE)
 
         // Retrieve saved switch value
-        val isChecked = sharedPreferences.getBoolean(checkedSwitch, false)
-        binding.saveSwitch.isChecked = isChecked
+        val isEnabled = sharedPreferences.getBoolean(enabledSwitch, false)
+        binding.saveSwitch.isChecked = isEnabled
 
         binding.saveSwitch.setOnCheckedChangeListener { _, isChecked ->
             // Save switch value to SharedPreferences
             val editor = sharedPreferences.edit()
-            editor.putBoolean(checkedSwitch, isChecked)
+            editor.putBoolean(enabledSwitch, isChecked)
             editor.apply()
 
             val message = if (isChecked) "Scores will be saved" else "Scores will not be saved"
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+            // Send the switch state to MainActivity
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("isEnabled", isChecked)
+            startActivity(intent)
         }
     }
 
-
-        override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
             val inflater: MenuInflater = menuInflater
             inflater.inflate(R.menu.main_menu, menu)
             return true
