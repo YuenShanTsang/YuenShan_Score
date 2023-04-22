@@ -20,6 +20,12 @@ class MainActivity : AppCompatActivity() {
     // Initialize shared preferences variable
     private lateinit var sharedPrefs: SharedPreferences
 
+    // Keys
+    private val scorePrefs = "ScorePrefs"
+    private val savePrefs = "SavePrefs"
+    private val teamASavedScore = "teamASavedScore"
+    private val teamBSavedScore = "teamBSavedScore"
+
     // Update score variable declaration
     private var teamAScore = 0
     private var teamBScore = 0
@@ -34,16 +40,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Retrieve the saved scores from shared preferences
-        sharedPrefs = getSharedPreferences("ScorePrefs", Context.MODE_PRIVATE)
-        teamAScore = sharedPrefs.getString("teamA_score", "0")?.toInt() ?: 0
-        teamBScore = sharedPrefs.getString("teamB_score", "0")?.toInt() ?: 0
+        sharedPrefs = getSharedPreferences(scorePrefs, Context.MODE_PRIVATE)
+        teamAScore = sharedPrefs.getString(teamASavedScore, "0")?.toInt() ?: 0
+        teamBScore = sharedPrefs.getString(teamBSavedScore, "0")?.toInt() ?: 0
 
         // Set the text views to display the saved scores
         binding.scoreATextView.text = teamAScore.toString()
         binding.scoreBTextView.text = teamBScore.toString()
 
         // Update the score if the switch is turned off
-        val isEnabled = intent.getBooleanExtra("isEnabled", switchEnabled())
+        val isEnabled = intent.getBooleanExtra("switchEnabled", switchEnabled())
         if (!isEnabled) {
             teamAScore = 0
             teamBScore = 0
@@ -123,17 +129,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun switchEnabled() : Boolean {
         // Retrieve the value of the "EnabledSwitch" boolean preference from the "SavePrefs" SharedPreferences
-        return getSharedPreferences("SavePrefs", Context.MODE_PRIVATE)
+        return getSharedPreferences(savePrefs, Context.MODE_PRIVATE)
             .getBoolean("EnabledSwitch", false)
     }
 
     private fun saveScore() {
         if (switchEnabled()) {
-            val editor = getSharedPreferences("ScorePrefs", Context.MODE_PRIVATE).edit()
+            val editor = getSharedPreferences(scorePrefs, Context.MODE_PRIVATE).edit()
             // Add the scores for team A and team B as String values to the editor
             editor.apply {
-                putString("teamA_score", teamAScore.toString())
-                putString("teamB_score", teamBScore.toString())
+                putString(teamASavedScore, teamAScore.toString())
+                putString(teamBSavedScore, teamBScore.toString())
             }.apply()
         }
     }
